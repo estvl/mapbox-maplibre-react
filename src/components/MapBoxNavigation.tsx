@@ -228,7 +228,7 @@ const MapNavigation: React.FC = () => {
 
     // Pitch the map for a 3D-like effect
     mapRef.current.easeTo({
-      pitch: 45,
+      pitch: 75,
       bearing: 0,
       duration: 1000,
     });
