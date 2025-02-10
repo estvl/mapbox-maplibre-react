@@ -12,6 +12,7 @@
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
+    "dotenv": "^16.4.7",
     "leaflet": "^1.9.4",
     "mapbox-gl": "^3.9.4",
     "maplibre-gl": "^5.1.0",

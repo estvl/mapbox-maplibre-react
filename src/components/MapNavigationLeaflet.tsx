@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents, GeoJSON } from 'react-leaflet';
-import L, { LatLngExpression, GeoJSON as GeoJSONType } from 'leaflet';
+import L, { LatLngExpression  } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { GeoJsonObject } from 'geojson';
 // Fix per icone Leaflet (se non le vedi correttamente)
@@ -18,7 +18,7 @@ const defaultIcon = L.icon({
 L.Marker.prototype.options.icon = defaultIcon;
 
 // OpenRouteService key (imposta la tua)
-const ORS_API_KEY = process.env.APP_ORS_API_KEY;
+const ORS_API_KEY = import.meta.env.VITE_APP_ORS_API_KEY!;
 
 type Point = { lat: number; lng: number };
 
@@ -74,6 +74,7 @@ const MapNavigationLeaflet: React.FC = () => {
     if (!startPoint || !endPoint) return;
 
     try {
+        console.log(ORS_API_KEY);
       const response = await fetch(
         'https://api.openrouteservice.org/v2/directions/foot-hiking/geojson',
         {
@@ -96,7 +97,7 @@ const MapNavigationLeaflet: React.FC = () => {
 
       // Estrae step dal JSON
       const routeSteps: Step[] =
-        data.features[0].properties.segments?.[0]?.steps?.map((s: any) => ({
+        data.features[0].properties.segments?.[0]?.steps?.map((s: Step) => ({
           instruction: s.instruction,
           distance: s.distance,
           duration: s.duration,

@@ -5,10 +5,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 // *** IMPORTANT ***
 // 1) Set your Mapbox access token
-mapboxgl.accessToken = 'pk.eyJ1IjoiZW1hcGJveDkxIiwiYSI6ImNtNXUzMGR3ajByMW0yaXNpemh1ZHlnanQifQ.wJFMKE-ESj9e2hiMYv6dpA';
+mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN!;
 
 // 2) Set your OpenRouteService API key
-const ORS_API_KEY = '5b3ce3597851110001cf6248edbbde8ff61441a1a9500157e2b7ae93';
+const ORS_API_KEY = import.meta.env.VITE_APP_ORS_API_KEY!;
+
+ 
 
 // A simple type for user-chosen points on the map.
 type Point = { lng: number; lat: number };

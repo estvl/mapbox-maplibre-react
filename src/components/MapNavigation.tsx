@@ -6,7 +6,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 // 1) No access token is required with MapLibre GL
 
 // 2) Set your OpenRouteService API key
-const ORS_API_KEY = process.env.APP_ORS_API_KEY;
+const ORS_API_KEY = import.meta.env.VITE_APP_ORS_API_KEY!;
 
 // A simple type for user-chosen points on the map.
 type Point = { lng: number; lat: number };
@@ -18,9 +18,10 @@ type Step = {
   duration: number; // in seconds
 };
 
-const token_map_tiler = process.env.MAP_TILER_TOKEN;
+const token_map_tiler = import.meta.env.VITE_MAP_TILER_TOKEN;
 const MAP_STYLE = `https://api.maptiler.com/maps/streets-v2/style.json?key=${token_map_tiler}`;
 
+console.log(MAP_STYLE);
 
 const MapNavigation: React.FC = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
@@ -144,7 +145,7 @@ const MapNavigation: React.FC = () => {
 
     try {
       const response = await fetch(
-        'https://api.openrouteservice.org/v2/directions/foot-hiking/geojson',
+        '/ors/v2/directions/foot-hiking/geojson',
         {
           method: 'POST',
           headers: {
@@ -189,7 +190,7 @@ const MapNavigation: React.FC = () => {
   /**
    * Add or update the route line on the map
    */
-  const addRouteLayer = (data: any) => {
+  const addRouteLayer = (data: string) => {
     if (!mapRef.current) return;
     const map = mapRef.current;
     const sourceId = 'route';
