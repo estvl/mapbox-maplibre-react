@@ -3,6 +3,7 @@ import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import MapNavigation from './components/MapNavigation';
 import MapBoxNavigation from './components/MapBoxNavigation';
+import MapNavigationLeaflet from './components/MapNavigationLeaflet';
 
 const Home: React.FC = () => {
   return (
@@ -15,12 +16,13 @@ const Home: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <div className="App" style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <div className="App" style={{ display: 'absolute', flexDirection: 'column', height: '100vh', width: '210vh' }}>
       {/* Navigation Bar */}
       <header style={{ padding: '10px', background: '#eee' }}>
         <Link style={{ marginRight: '10px' }} to="/">Home</Link>
-        <Link style={{ marginRight: '10px' }} to="/map">MapLibre Navigation</Link>
-        <Link to="/box">MapBox Navigation</Link>
+        <Link style={{ marginRight: '10px' }} to="/maplibre">MapLibre Navigation</Link>
+        <Link to="/mapbox">MapBox Navigation</Link>
+        <Link to="/map-leaflet">Map Leaflet Navigation</Link>
       </header>
 
       {/* Main content area */}
@@ -35,8 +37,9 @@ const App: React.FC = () => {
       >
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/map" element={<MapNavigation />} />
-          <Route path="/box" element={<MapBoxNavigation />} />
+          <Route path="/maplibre" element={<MapNavigation />} />
+          <Route path="/mapbox" element={<MapBoxNavigation />} />
+          <Route path="/map-leaflet" element={<MapNavigationLeaflet />} />
         </Routes>
       </main>
     </div>

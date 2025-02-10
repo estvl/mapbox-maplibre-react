@@ -6,7 +6,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 // 1) No access token is required with MapLibre GL
 
 // 2) Set your OpenRouteService API key
-const ORS_API_KEY = '5b3ce3597851110001cf6248edbbde8ff61441a1a9500157e2b7ae93';
+const ORS_API_KEY = process.env.APP_ORS_API_KEY;
 
 // A simple type for user-chosen points on the map.
 type Point = { lng: number; lat: number };
@@ -18,8 +18,9 @@ type Step = {
   duration: number; // in seconds
 };
 
-// Use a publicly available style – you can replace this with your own style URL if needed.
-const MAP_STYLE = 'https://demotiles.maplibre.org/style.json';
+const token_map_tiler = process.env.MAP_TILER_TOKEN;
+const MAP_STYLE = `https://api.maptiler.com/maps/streets-v2/style.json?key=${token_map_tiler}`;
+
 
 const MapNavigation: React.FC = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
